@@ -5,5 +5,5 @@ import os
 
 class DBconnection:
     def __init__(self):
-            engine =create_engine("postgres://postgres:postgres@127.0.0.1:5432/NAIS", echo=False)
+            engine =create_engine("postgres://postgres:postgres@127.0.0.1:5432/NAInfoSys", echo=False)
 
