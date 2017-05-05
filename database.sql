@@ -77,5 +77,31 @@ create or replace function dropfocal(par_id int8) returns text as
                 loc_res ='Data Not Found.';
             else
 
+                --how to delete po
+                loc_res ='Data deleted';
+            end if;
+                return loc_res;
+    $$
+        language 'plpgsql';
+
+create or replace function updatefocal(par_id int8, par_designation text) returns text as
+	$$
+		declare
+			loc_id text;
+			loc_res text;
+		begin
+			select into focal where id= par_id;
+			if loc_id isnull then
+				loc_res = 'Data not found';
+			else
+				--update query
+				loc_res ='Data updated.';
+			end if;
+				return loc_res;
+	$$
+		language 'plpgsql';
+
+
+
 
 
