@@ -2,6 +2,7 @@
 
 from flask import Flask, jsonify
 from database import DBconnection
+from flask_httpauth import HTTPBasicAuth
 import flask
 import sys
 
@@ -9,38 +10,24 @@ app = Flask(__name__)
 auth = HTTPBasicAuth()
 
 def spcall(query, param, commit=False):
-	try:
-		dbo=DBconnection()
-		cursor=dbo.getcursor()
-		cursor.callproc(query, param)
-		res = cursor.fetchall()
-		
-		if commit:
-			dbo.dbcommit()
-		return res
-	
-	except:
-		res = [("Error: " +str(sys.exc_info()[0]) + " " +str(sys.exc_info()[1]),)]
+    try:
+        dbo=DBconnection()
+        cursor=dbo.getcursor()
+        cursor.callproc(query, param)
+        res = cursor.fetchall()
 
-	return res
+        if commit:
+            dbo.dbcommit()
+        return res
 
+    except:
+        res = [("Error: " +str(sys.exc_info()[0]) + " " +str(sys.exc_info()[1]),)]
+
+    return res
 @app.route('/')
 def index():
-	return "Still Confused"
+    return "Hi"
 
-@app.route('/focal', methods=['POST'])
-def insertfocal():
-	id=request.form['id']
-	fname = request.form['fname']
-	lname = request.form['lname']
-	designation = request.form['designation']
-	
-	res = spcall("newfocal", (id, fname, lname, designation), True)
-	
-	if 'Error' in res[0][0]:
-		return jsonify({'status': 'error', 'message': res[0][0]})
-	return jsonify({'status': 'ok', 'message':res[0][0]})
-	
 
 
 @app.after_request
@@ -59,6 +46,6 @@ def add_cors(resp):
 if __name__ == '__main__':
     app.run(debug=True)
 
-	
-	
+
+
 
