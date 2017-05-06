@@ -87,7 +87,7 @@ create or replace function dropfocal(par_id int8) returns text as
 --select dropfocal(10);
 --select dropfocal(2);
 
-create or replace function updatefocal(par_id int8, par_designation text) returns text as
+create or replace function updatefocal(in par_id int8, par_designation text) returns text as
 	$$
 		declare
 			loc_id text;
@@ -133,7 +133,7 @@ create or replace function updatefocal(par_id int8, par_designation text) return
         language 'plpgsql';
 	--select dropChild(1234);
 	
-	create or replace function updateChild(par_id int8, ) returns text as
+	create or replace function updateChild(in par_id int8) returns text as
 	$$
 		declare
 			loc_id text;
