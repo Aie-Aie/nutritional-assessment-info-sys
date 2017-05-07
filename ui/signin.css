@@ -2,6 +2,10 @@ body {
   padding-top: 40px;
   padding-bottom: 40px;
   background-color: #eee;
+  background-image: url("background/bg2.jpg");
+  background-repeat: no-repeat;
+  background-size: 1560px 1120px;
+
 }
 
 .form-signin {
@@ -9,9 +13,15 @@ body {
   padding: 15px;
   margin: 0 auto;
 }
+.form-signin-heading{
+	color: dark gray;
+	font-size: 40px;
+	
+}
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
   margin-bottom: 10px;
+  font-family: "Times New Roman", Times, serif;
 }
 .form-signin .checkbox {
   font-weight: normal;
