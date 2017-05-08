@@ -26,6 +26,10 @@ input { display: table-cell; }
   
 }
 
+#submit{
+  align: "right";
+}
+
 
 .sidebar {
   display: none;
