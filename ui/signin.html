@@ -27,15 +27,16 @@
       <form class="form-signin">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="id" class="sr-only">ID</label>
-        <input type="uname" id="name" class="form-control" placeholder="Username">
+        <input type="uname" id="name" class="form-control"  name="name" placeholder="Username">
         <label for="inputPassword" class="sr-only">Password</label>
 		<br>
-        <input type="password" id="id" class="form-control" placeholder="ID">
+        <input type="password" id="id" name="id" class="form-control" placeholder="ID">
         
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="signin();">Sign in</button>
       </form>
 
     </div> <!-- /container -->
-
+	<script src="app.js"></script>
   </body>
+  
 </html>
