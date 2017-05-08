@@ -50,7 +50,7 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li><a href="dashboard.html">Overview<span class="sr-only">(current)</span></a></li>
+            <li id="overview"><a href="#">Overview<span class="sr-only"></span></a></li>
             <li id="focal"><a href="#">Focal Person</a></li>
             <li id="municipality"><a href="#">Municipality</a></li>
             <li id="child_entry"><a href="#">Children</a></li>
@@ -60,18 +60,24 @@
         <div id="stat" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 			<h2 class="sub-header">Statistical Summary</h2>
         </div>
+		<a href="javascript:showhide('func')">
+    		Click to show/hide.
+    	</a>
 		
-		<div id="func_focal" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-			<h3>Hi</h3>
-		</div>
-		
-		<div id="func_municipality" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-			<h3>Municipality</h3>
-		</div>
-		
-		<div id="func_child" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-			<h3>Child</h3>
-		</div>
+			<div id="func_focal"  style="display:none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<button type="button" class="btn btn-primary">Update Entry</button>
+				<button type="button" class="btn btn-primary">Add Entry</button>
+				<button type="button" class="btn btn-primary">Delete Entry</button>
+			</div>
+			
+			<div id="func_municipality" style="display:none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<h3>Municipality</h3>
+			</div>
+			
+			<div id="func_child" style="display:none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<h3>Child</h3>
+			</div>
+	
 		
 		
       </div>
