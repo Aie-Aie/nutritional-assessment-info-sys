@@ -5,6 +5,7 @@ body {
   background-image: url("background/bg2.jpg");
   background-repeat: no-repeat;
   background-size: 1560px 1120px;
+  font-family: "Courier New";
 
 }
 
@@ -15,13 +16,14 @@ body {
 }
 .form-signin-heading{
 	color: dark gray;
-	font-size: 40px;
+	font-size: 30px;
 	
 }
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
   margin-bottom: 10px;
-  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+ 
 }
 .form-signin .checkbox {
   font-weight: normal;
