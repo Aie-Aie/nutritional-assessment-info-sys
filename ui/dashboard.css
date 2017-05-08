@@ -1,6 +1,7 @@
 
 body {
   padding-top: 50px;
+   font-family: "Courier New";
 }
 
 
@@ -11,6 +12,11 @@ body {
 
 .navbar-fixed-top {
   border: 0;
+}
+.navbar-brand{
+  font-family: "Courier New";
+  font-weight: bold;
+  
 }
 
 
