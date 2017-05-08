@@ -39,9 +39,7 @@
 			<li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
          
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search">
-          </form>
+         
         </div>
       </div>
     </nav>
@@ -57,28 +55,110 @@
           </ul>
          
         </div>
+		
         <div id="stat" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 			<h2 class="sub-header">Statistical Summary</h2>
         </div>
-		<a href="javascript:showhide('func')">
-    		Click to show/hide.
-    	</a>
+		<div id="table" style="display:none;" align= "right">
+				
+			<br>
+			<br>
+			<form class="form-inline" pull-right>
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Search">
+							<a href="#"><span class="glyphicon glyphicon-search"></span></a>
+						 </div>
+						
+						<button type="button" class="btn btn-primary">Update Entry</button>
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" >Add Entry</button>
+						<button type="button" class="btn btn-primary">Delete Entry</button>
 		
-			<div id="func_focal"  style="display:none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<button type="button" class="btn btn-primary">Update Entry</button>
-				<button type="button" class="btn btn-primary">Add Entry</button>
-				<button type="button" class="btn btn-primary">Delete Entry</button>
-			</div>
+			</form>
 			
-			<div id="func_municipality" style="display:none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<h3>Municipality</h3>
-			</div>
+		<div class="container">
+			  <div class="modal fade" id="myModal" role="dialog" align="left">
+				<div class="modal-dialog"> 
+				  <div class="modal-content">
+					<div class="modal-header">
+					  <button type="button" class="close" data-dismiss="modal">&times;</button>
+					  <h3 style="color: cornflowerblue;" class="modal-title"><b>New Entry</b></h3>
+					</div>
+					<div class="modal-body">
+						<form class="form-inline" text-align="right">
+						
+							<p>
+							<label for="fname">First Name:</label>
+							<input type="text" class="form-control" id="fname" placeholder="First Name">
+							<br>
+							<br>
+							</p>
+							
+							<p>
+							<label for="lname">Last Name:</label>
+							<input type="text" class="form-control" id="lname" placeholder="Last Name">
+							<br>
+							<br>
+							</p>
+							
+							<p>
+							<label for="position">Position:</label>
+							<input type="text" class="form-control" id="pos" placeholder="Position">
+							<br>
+							<br>
+							</p>
+							
+							<div id ="submit">
+							<button type="button" class="btn btn-primary">Submit</button>
+							</div>
+							
+						</form>
+					</div>
+					
+				  </div>
+				  
+				</div>
+			  </div>
+		  
+			  <br>
+			  <br>
+				
+					
+		</div>
+		<div id="func_focal"  align= "right" style="display:none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 			
-			<div id="func_child" style="display:none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<h3>Child</h3>
-			</div>
+			 <table class="table">
+				<thead>
+				  <tr>
+					<th>#</th>
+					<th>Firstname</th>
+					<th>Lastname</th>
+					<th>Age</th>
+					<th>City</th>
+					<th>Country</th>
+				  </tr>
+				</thead>
+				<tbody>
+				  <tr>
+					<td>1</td>
+					<td>Anna</td>
+					<td>Pitt</td>
+					<td>35</td>
+					<td>New York</td>
+					<td>USA</td>
+				  </tr>
+				</tbody>
+			  </table>
+		</div>
+		
+		<div id="func_municipality" style="display:none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<h3>Municipality</h3>
+		</div>
+		
+		<div id="func_child" style="display:none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<h3>Child</h3>
+		</div>
+
 	
-		
 		
       </div>
     </div>

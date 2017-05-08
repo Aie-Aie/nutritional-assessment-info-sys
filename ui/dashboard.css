@@ -2,7 +2,13 @@
 body {
   padding-top: 50px;
    font-family: "Courier New";
+   font-weight:bold;
 }
+form  { display: table;      }
+p     { display: table-row;  }
+label { display: table-cell; }
+input { display: table-cell; }
+
 
 
 .sub-header {
