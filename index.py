@@ -3,8 +3,9 @@
 from flask import Flask, jsonify
 from database import DBconnection
 from flask_httpauth import HTTPBasicAuth
-import flask
-import sys
+import sys, flask
+import warnings
+from flask.exthook import ExtDeprecationWarning
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
@@ -28,6 +29,10 @@ def spcall(query, param, commit=False):
 def index():
     return "Hi"
 
+@app.route('/access', methods=['POST'])
+def signin():
+    id = request.form['id']
+    name = request.form['name']
 
 
 @app.after_request
@@ -45,7 +50,4 @@ def add_cors(resp):
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-
 
