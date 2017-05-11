@@ -14,6 +14,28 @@ create table employees(
 	
 
 );
+create or replace function getaccess(par_id int8, par_lname text) returns text as
+$$
+	declare
+		loc_id text;
+		loc_res text;
+	
+	begin
+		select into loc_id id, position from employees where id=par_id;
+		
+		if loc_id is null then
+			loc_res = 'Person not authorized';
+		
+		else
+			loc_res = 'Access granted';
+		
+		end if;
+			return loc_res;
+	end;
+
+$$ 
+	language 'plpgsql';
+			
 
 create or replace function newEmployee(par_id int8, par_fname text, par_lname text, par_position text) returns text as
 $$

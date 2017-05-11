@@ -12,9 +12,9 @@
     <title>Signin Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{url_for('static', filename ='dist/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="signin.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename = 'signin.css') }}" rel="stylesheet">
 
    
 
@@ -32,11 +32,16 @@
 		<br>
         <input type="password" id="id" name="id" class="form-control" placeholder="ID">
         
-        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="signin();" >Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="signin();">Sign in</button>
       </form>
 
     </div> <!-- /container -->
-	<script src="app.js"></script>
+	
+	<div id="err">
+	</div>
+
+	<script src = "{{ url_for('static', filename = 'app.js') }}" ></script>
+	
   </body>
   
 </html>

@@ -1,9 +1,10 @@
 #author: Ailen Aspe
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify,request
 from database import DBconnection
 from flask_httpauth import HTTPBasicAuth
-import sys, flask
+from flask import render_template, redirect, url_for, session, flash
+import sys, flask, os
 import warnings
 from flask.exthook import ExtDeprecationWarning
 
@@ -27,12 +28,21 @@ def spcall(query, param, commit=False):
     return res
 @app.route('/')
 def index():
-    return "Hi"
+    return render_template('signin.html')
 
-@app.route('/access', methods=['POST'])
-def signin():
-    id = request.form['id']
-    name = request.form['name']
+@app.route('/access', methods =['POST'])
+def authenticate():
+    id= request.form['id']
+    name =request.form['name']
+
+    res =spcall("getaccess", (id, name), True)
+    if 'Person not authorized' in res[0][0]:
+        return '<html>' \
+               '<script> alert({res[0][0]})' \
+               '</html></script>'
+    else:
+        return render_template("dashboard.html")
+    
 
 
 @app.after_request
