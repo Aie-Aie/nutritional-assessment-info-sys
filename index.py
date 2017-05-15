@@ -37,9 +37,7 @@ def authenticate():
 
     res =spcall("getaccess", (id, name), True)
     if 'Person not authorized' in res[0][0]:
-        return '<html>' \
-               '<script> alert({res[0][0]})' \
-               '</html></script>'
+        return render_template("signin.html")
     else:
         return render_template("dashboard.html")
     
