@@ -28,6 +28,7 @@ $(function(){
 	
 	$('#overview').click(function(){
 		$('#stat').show();
+		$('#table').hide();
 		$('#func_focal').hide();
 		$('#func_child').hide();
 		$('#func_municipality').hide();
