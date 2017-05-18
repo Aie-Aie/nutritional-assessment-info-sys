@@ -3,11 +3,11 @@ body {
   padding-bottom: 40px;
   background-color: #eee;
   background-image: url("background/bg2.jpg");
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
+  background-size: 1560px 1120px;
   font-family: "Courier New";
 
 }
-
 
 .form-signin {
   max-width: 330px;
