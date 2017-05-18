@@ -7,8 +7,8 @@ body {
   font-family: "Courier New";
 
 }
-html{
-  background-size:cover;
+head{
+  background-size: 300px 100px, cover;
 }
 
 .form-signin {
