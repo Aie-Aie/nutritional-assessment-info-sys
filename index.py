@@ -28,9 +28,10 @@ def spcall(query, param, commit=False):
     return res
 @app.route('/')
 def index():
-    return render_template('signin.html')
+    return "HI"
 	
-@app.route('/entries')
+
+@app.route('/entries', methods=['GET'])
 def getfocal():
 	res = spcall('getfocal', ())
 	
@@ -40,7 +41,7 @@ def getfocal():
 	
 	for r in res:
 		recs.append({"id":r[0], "first_name":r[1], "last_name":r[2], "position":r[3]})
-	return jsonify({'status':'ok', 'entries':recs, 'count':lens(recs)})
+	return jsonify({'status':'ok', 'entries':recs, 'count':len(recs)})
 		
 		
 		

@@ -19,6 +19,7 @@ function loadentry()
 					last_name = resp.entries[i].last_name;
 					position = resp.entries[i].position;
 					$("#func_focal").append(rowtask(id, first_name, last_name, position));
+					
 				}
 			}
 			else
@@ -36,20 +37,20 @@ function loadentry()
 }
 	
 	
-function rowtask(description, done, id, title)
+function rowtask(id, first_name, last_name, position)
 {
+  
    var table = document.getElementById("Employeetable");
+   var row = table.insertRow(0);
+   var cell1 = row.insertRow(0);
+   var cell2 = row.insertRow(1);
+   var cell3 = row.insertRow(2);
+   var cell4 = row.insertRow(3);
    
-   return  '<div class="box-body table-responsive no-padding">'+
-	
-					'<tr>					'+
-					'	<td>' +id+		'	</td>		'+
-					'	<td>' +first_name+'	</td>		'+
-					'	<td>' +last_name +' </td>		'+
-					'	<td>' +position+ '  </td>		'+
-					
-					'</tr>					'+
-            '</div>							';
+   cell1.innerHTML = id;
+   cell2.innerHTML = first_name;
+   cell3.innerHTML =last_name;
+   cell4.innerHTML = position;
    
    
 }
