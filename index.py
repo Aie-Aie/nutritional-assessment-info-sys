@@ -30,7 +30,12 @@ def spcall(query, param, commit=False):
 def index():
     return render_template('signin.html')
 	
-
+@app.route('/entries')
+def getfocal():
+	res = spcall('getfocal', ())
+	
+	if 'Error' in str(res[0][0]):
+		
 
 @app.route('/access', methods =['POST'])
 def login():
