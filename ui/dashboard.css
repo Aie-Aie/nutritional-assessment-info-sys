@@ -14,6 +14,7 @@ input { display: table-cell; }
 .sub-header {
   padding-bottom: 10px;
   border-bottom: 1px solid #eee;
+
 }
 
 .navbar-fixed-top {
@@ -23,11 +24,11 @@ input { display: table-cell; }
 .navbar-brand{
   font-family: "Courier New";
   font-weight: bold;
+ 
   
 }
-
-#submit{
-  align: "right";
+#stat{
+	 
 }
 
 
@@ -50,10 +51,20 @@ input { display: table-cell; }
   }
 }
 
+#navigation{
+	background: lightgreen;
+}
+#sidedown{
+	 font-weight: bold;
+}
+
+
+
 .nav-sidebar {
   margin-right: -21px; /* 20px padding + 1px border */
   margin-bottom: 20px;
   margin-left: -20px;
+  
 }
 .nav-sidebar > li > a {
   padding-right: 20px;

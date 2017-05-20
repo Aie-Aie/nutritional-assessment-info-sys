@@ -29,9 +29,11 @@ def spcall(query, param, commit=False):
 @app.route('/')
 def index():
     return render_template('signin.html')
+	
+
 
 @app.route('/access', methods =['POST'])
-def authenticate():
+def login():
     id= request.form['id']
     name =request.form['name']
 

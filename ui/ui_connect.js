@@ -5,15 +5,18 @@ $(function(){
 		$('#table').show();
 		$('#func_child').hide();
 		$('#func_municipality').hide();
+		$('#focaltable').show();
 		
 	});
 	
 	$('#municipality').click(function(){
 		$('#stat').hide();
 		$('#table').show();
-		$('#func_focal').hide();
 		$('#func_child').hide();
 		$('#func_municipality').show();
+		$('#focaltable').hide();
+		
+		$('#func_focal').hide();
 	
 	});
 	
@@ -23,14 +26,17 @@ $(function(){
 		$('#table').show();
 		$('#func_child').show();
 		$('#func_municipality').hide();
+		$('#focaltable').hide();
 	
 	});
 	
 	$('#overview').click(function(){
 		$('#stat').show();
+		$('#table').hide();
 		$('#func_focal').hide();
 		$('#func_child').hide();
 		$('#func_municipality').hide();
+		$('#focaltable').hide();
 	
 	});
 	
