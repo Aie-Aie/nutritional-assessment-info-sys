@@ -3,7 +3,7 @@ function loadentry()
 {
 	$.ajax
 	({
-		url: 'http://127.0.0.1:5000/entries',
+		url: 'http://127.0.0.1:5000/focalentries',
 		type: "GET",
 		dataType: "json",
 		success: function(resp)
@@ -39,20 +39,31 @@ function loadentry()
 	
 function rowtask(id, first_name, last_name, position)
 {
-  
-   var table = document.getElementById("Employeetable");
-   var row = table.insertRow(0);
-   var cell1 = row.insertRow(0);
-   var cell2 = row.insertRow(1);
-   var cell3 = row.insertRow(2);
-   var cell4 = row.insertRow(3);
-   
-   cell1.innerHTML = id;
-   cell2.innerHTML = first_name;
-   cell3.innerHTML =last_name;
-   cell4.innerHTML = position;
+		
+		
+		return '<div class="col-lg-12">' +
+			  '<h4>' + id + "&nbsp;&nbsp;" + first_name + '</h4>' +
+			  '<p>'+last_name+' </br> Position: '+position+'</p> </div>'; 
+
    
    
+   
+}
+
+function addfocal(){
+	
+	$.ajax
+	({
+		url: 'http://127.0.0.1:5000/focal',
+		type: "GET",
+		dataType: "json",
+		success: function(resp)
+		{
+			
+		}
+			
+		
+	});
 }
 
 	
