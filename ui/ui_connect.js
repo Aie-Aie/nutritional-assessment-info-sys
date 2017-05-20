@@ -6,6 +6,7 @@ $(function(){
 		$('#func_child').hide();
 		$('#func_municipality').hide();
 		$('#focaltable').show();
+		$('#Employeetable').show();
 		
 	});
 	
@@ -15,7 +16,7 @@ $(function(){
 		$('#func_child').hide();
 		$('#func_municipality').show();
 		$('#focaltable').hide();
-		
+		$('#Employeetable').hide();
 		$('#func_focal').hide();
 	
 	});
