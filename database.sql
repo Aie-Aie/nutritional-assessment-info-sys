@@ -5,6 +5,14 @@ create table focal(
     designation text
 );
 
+create or replace function getfocal(out int8, out text, out text, out text) returns setof record as
+$$
+	select id, first_name, last_name, position from employees;
+$$
+language 'sql';
+
+-- select * from getfocal();
+
 
 create table employees(
 	id int8 primary key,
@@ -60,6 +68,7 @@ $$
 	language 'plpgsql';
 
 --	select newEmployee(20131364, 'Ailen Grace', 'Aspe', 'Supervisor');
+-- select newEmployee(20130000, 'Sherlock', 'Holmes', 'Focal Person');
 
 
 

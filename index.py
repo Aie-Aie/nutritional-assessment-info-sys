@@ -35,6 +35,14 @@ def getfocal():
 	res = spcall('getfocal', ())
 	
 	if 'Error' in str(res[0][0]):
+		return jsonify({'status':'error', 'message':res[0][0]})
+	recs=[]
+	
+	for r in res:
+		recs.append({"id":r[0], "first_name":r[1], "last_name":r[2], "position":r[3]})
+	return jsonify({'status':'ok', 'entries':recs, 'count':lens(recs)})
+		
+		
 		
 
 @app.route('/access', methods =['POST'])

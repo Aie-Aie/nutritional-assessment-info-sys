@@ -29,7 +29,23 @@ function loadentry()
 		success: function(resp)
 		{
 			$("#func_focal").html("");
-			if(resp
+			if(resp.status =="ok")
+			{
+				for(i=0; i<resp.count; i++)
+				{
+					id = resp.entries[i].id;
+					first_name=resp.entries[i].first_name;
+					last_name = resp.entries[i].last_name;
+					position = resp.entries[i].position;
+					 $("#func_focal").append(rowtask(id, first_name, last_name, position));
+				}
+			}
+			else
+			{
+				   $("#tasks").html("");
+				   alert(resp.message);
+			}
+			
 			
 			
 			
@@ -40,6 +56,17 @@ function loadentry()
 		}
 		
 	)};
+	
+	
+function rowtask(description, done, id, title)
+{
+   return '<div class="col-lg-12">' +
+		  '<h4>' + id + "&nbsp;&nbsp;" + first_name + '</h4>' +
+		  '<p>'+last_name+' </br> Status: '+position+'</p> </div>'; 
+}
+
+	
+	
 	
 
 }
