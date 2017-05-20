@@ -31,7 +31,7 @@ def index():
     return "HI"
 	
 
-@app.route('/entries', methods=['GET'])
+@app.route('/focalentries', methods=['GET'])
 def getfocal():
 	res = spcall('getfocal', ())
 	
@@ -56,7 +56,10 @@ def login():
         return render_template("signin.html")
     else:
         return render_template("dashboard.html")
-    
+
+@app.route('/focal', methods =['POST'])
+def addfocal():
+	
 
 
 @app.after_request
