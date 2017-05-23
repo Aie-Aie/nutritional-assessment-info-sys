@@ -48,7 +48,7 @@ def searchfocal(data):
 	
 	return jsonify({'status':'ok', 'entries':recs, 'count':len(recs)})
 	
-	
+
 	
 
 # view existing focals
