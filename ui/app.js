@@ -44,11 +44,7 @@ function rowtask(id, lname, fname, pos)
 	  '<p> Position: '+pos+'</p>'+
 	  '</div>'; 
 }
-	
-function rowfoc(fname, lname, position){
-	
-   var row ='<td>
-}
+
 
 function searchfoc(){
 	var data =$('#focdetail').val();
@@ -59,6 +55,7 @@ function searchfoc(){
 		dataType: "json",
 		success: function(resp)
 		{
+		
 			if(resp.status == 'ok'){
 				for(i=0; i<resp.count; i++)
 				{
@@ -66,6 +63,7 @@ function searchfoc(){
 					lname =resp.entries[i].lname;
 					position=resp.entries[i].position;
 					$("#func_focal").append(rowfoc(fname, lname, position));
+					//rowfoc(fname, lname, position);
 				}
 			
 			}
@@ -83,6 +81,23 @@ function searchfoc(){
 		
 		
 	});
+}
+function deletefocal(){
+	alert("hi uy");
+}
+	
+function rowfoc(fname, lname, position){
+	
+	 var row = '<tr class="table-success">'+
+			'<td>'+fname+'</td>'+
+			'<td>'+lname+'</td>'+
+			'<td>'+position+'</td>'+
+			'<td style="width:200px;"><button class="btn success" onclick="updatefoc();" style="background-color: #4CAF50;"><b>Update</b></button>'+
+			'<button class="btn success" onclick= "deletefocal();" style="background-color: #f44336;"><b>Delete</b></button></td>'+
+			'</tr>';
+	
+   $("tbody").append(row);
+    
 }
 function addfocal(){
 	$.ajax({
@@ -167,7 +182,7 @@ function loadchild(){
 	
 	});
 }
-function showchildstat(){
+function showchildstat(a){
 	$.ajax({
 		url: 'http://127.0.0.1:5000/stat',
 		dataType: "json",
@@ -180,9 +195,10 @@ function showchildstat(){
 	
 	
 }
-function displachildstat(){
-	document.getElementById('showdata').innerHTML="Hello";
+function updatefoc(){
+	alert("Hi");
 }
+
 function childrow(childid, childfname, childlname, childweight, childheight, status){
 	
 	 return '<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">'+

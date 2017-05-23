@@ -6,6 +6,8 @@ $(function(){
 		$('#childfunc').hide();
 		$('#children').hide();
 		$('#childwork').hide();
+		$('#viewsearchfocal').show();
+		
 		
 		
 		
