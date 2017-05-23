@@ -19,6 +19,7 @@ input { display: table-cell; }
 
 .navbar-fixed-top {
   border: 0;
+  background-color: #001f3f;
 }
 
 .navbar-brand{
@@ -26,9 +27,6 @@ input { display: table-cell; }
   font-weight: bold;
  
   
-}
-#stat{
-	 
 }
 
 
@@ -73,7 +71,7 @@ input { display: table-cell; }
 .nav-sidebar > .active > a,
 .nav-sidebar > .active > a:hover,
 .nav-sidebar > .active > a:focus {
-  color: #fff;
+  color: #587ea3;;
   background-color: #428bca;
 }
 

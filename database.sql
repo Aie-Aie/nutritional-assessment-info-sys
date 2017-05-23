@@ -5,6 +5,14 @@ create table focal(
     designation text
 );
 
+create or replace function countstat(in data text) returns text as
+$$
+	select count(nutritional_status) from statusrepo where nutritional_status=data;
+$$
+language 'sql';
+--select * from countstat('Normal')
+
+
 create or replace function getfocal(out int8, out text, out text, out text) returns setof record as
 $$
 	select id, first_name, last_name, position from employees;
@@ -12,6 +20,20 @@ $$
 language 'sql';
 
 -- select * from getfocal();
+
+create or replace function getchildren(out int8, out text, out text, out real, out real, out text) returns setof record as
+$$
+	select children.id, children.first_name, children.last_name, children.weight, children.height, statusRepo.nutritional_status from children, statusRepo where statusRepo.id=children.id;
+$$
+language 'sql';
+--select * from getchildren()
+create or replace function searchfocal(in par_data text, out text, out text, out text)  returns setof record as
+$$
+	select first_name, last_name, position from employees where first_name=par_data or last_name=par_data or position=par_data;
+$$
+language 'sql';
+
+--select * from searchfocal('Holmes');
 
 
 create table employees(
@@ -81,21 +103,24 @@ create table children(
 );
 
 create table statusRepo(
-	id int8 references children(id),
+	
+	id int8 primary key references children(id),
 	calc_BMI real,
 	nutritional_status text
 );
 
-create or replace function newChild(par_id int, par_fname text, par_lname text, par_weight real, par_height real) returns text as
+create or replace function newchild(par_id int8,par_fname text, par_lname text, par_weight real, par_height real) returns text as
 $$
 	declare
 		loc_id text;
+		id text;
 		loc_res text;
 		status real;
 	
 	begin
 		if loc_id isnull then
 			insert into children(id, first_name, last_name, weight, height) values (par_id, par_fname, par_lname, par_weight, par_height);
+			
 			status := par_weight/(par_height*par_height);
 			
 			case
@@ -112,7 +137,7 @@ $$
 				
 			end case;
 		
-			insert into statusRepo(id, calc_BMI) values(par_id, status);
+			
 			
 			loc_res ='Successfully added';
 			
@@ -128,7 +153,48 @@ $$
 $$
 	language 'plpgsql';
 
---select newChild(20131234, 'Alberto', 'Einstein', 42, 1.6);
+
+create or replace function newchild2(par_id int8,par_fname text, par_lname text, par_weight real, par_height real) returns text as
+$$
+	declare
+		loc_id text;
+		loc_res text;
+		status real;
+	
+	begin
+		select into loc_id id from children where id=par_id;
+		if loc_id isnull then
+			insert into children(id, first_name, last_name, weight, height) values (par_id, par_fname, par_lname, par_weight, par_height);
+			status := par_weight/(par_height*par_height);
+			
+				case
+				when status< 18.5 then
+					insert into statusRepo(id, calc_BMI, nutritional_status) values(par_id, status, 'Underweight');
+				
+				when status >=18.5 and status <=24.9 then
+					insert into statusRepo(id, calc_BMI, nutritional_status) values(par_id, status, 'Normal');
+				when status >=25 and status <=29.9 then
+					insert into statusRepo(id, calc_BMI, nutritional_status) values(par_id, status, 'Overweight');
+				
+				else	
+					insert into statusRepo(id, calc_BMI, nutritional_status) values(par_id, status, 'Obesity');
+				
+			end case;
+			loc_res ='Successfully added';
+		
+			elsif loc_id is not null then
+			loc_res ='Child exists';
+		
+		end if;
+			return loc_res;
+	
+		
+	end;
+
+$$
+	language 'plpgsql';
+
+--select newchild2(20131234, 'Alberto', 'Einstein', 42, 1.6);
 
 
 create or replace function dropEmployee(par_id int8) returns text as

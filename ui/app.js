@@ -35,18 +35,55 @@ function loadentry(){
 	});
 }
 
-function rowtask(id, fname, lname, pos)
+function rowtask(id, lname, fname, pos)
 {
-   return '<div>'+
-			'<p><td>'+id+ '&nbsp;&nbsp;</td>'+	
-				'<td>'+fname+'&nbsp;&nbsp;</td>'+
-				'<td>'+lname+'&nbsp;&nbsp;</td>'+
-				'<td>'+pos+'</td></p>'+
-		  '</div>';
+
+	
+ return '<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">'+
+	  '<h4>' + id + "&nbsp;&nbsp;" + fname+ "&nbsp;&nbsp;" +lname+ '</h4>' +
+	  '<p> Position: '+pos+'</p>'+
+	  '</div>'; 
 }
 	
+function rowfoc(fname, lname, position){
+	
+   var row ='<td>
+}
 
-
+function searchfoc(){
+	var data =$('#focdetail').val();
+	console.log(data);
+	$.ajax({
+		url: 'http://127.0.0.1:5000/focaldata/'+data,
+		type: "GET",
+		dataType: "json",
+		success: function(resp)
+		{
+			if(resp.status == 'ok'){
+				for(i=0; i<resp.count; i++)
+				{
+					fname = resp.entries[i].fname;
+					lname =resp.entries[i].lname;
+					position=resp.entries[i].position;
+					$("#func_focal").append(rowfoc(fname, lname, position));
+				}
+			
+			}
+			else{
+				$('#func_focal').html("");
+				alert(resp.message);
+			}
+			
+		},
+		error: function(err)
+		{
+			
+			alert("Error in the system occurred");
+		}
+		
+		
+	});
+}
 function addfocal(){
 	$.ajax({
 		data:{
@@ -61,28 +98,97 @@ function addfocal(){
 		success:function(resp)
 		{
 			$("#func_focal").html("");
-			if(resp.status == 'ok'){
-				alert("Congrats error found");
-			}
-			else{
-				alert(resp.message);
-			}
+			alert(resp.message);
 		},
 		error: function(err)
 		{
-			alert("Error");
+			alert("Error in the system occurred");
 		}
 		
 	});
 }
 
-function searchfoc(){
+
+function addchild(){
 	$.ajax({
 		data:{
-			detail:$('#focalsearch').val()
+			childid: $('#childid').val(),
+			childlname:$('#childlname').val(),
+			childfname:$('#childfname').val(),
+			weight:$('#weight').val(),
+			height: $('#height').val()
+		},
+		url:'http://127.0.0.1:5000/child',
+		type: "POST",
+		dataType:"json",
+		success:function(resp)
+		{
+			alert(resp.message);
+		},
+		error: function(err)
+		{
+			alert("Error in the system occurred");
 		}
-		url: 
 		
 	});
 }
+
+
+
+function loadchild(){
+	$.ajax({
+		url: 'http://127.0.0.1:5000/childentries',
+		type: 'GET',
+		dataType: 'json',
+		success: function(resp)
+		{
+			$('#func_focal').html("");
+			if(resp.status == 'ok'){
+				for(i=0; i<resp.count; i++)
+				{
+					childid =resp.entries[i].id;
+					childfname =resp.entries[i].first_name;
+					childlname =resp.entries[i].last_name;
+					childweight =resp.entries[i].weight;
+					childheight=resp.entries[i].height;
+					status=resp.entries[i].status;
+					$("#func_child").append(childrow(childid, childfname, childlname, childweight, childheight, status));
+				}
+			
+			}
+			else{
+				$('#func_focal').html("");
+				alert(resp.message);
+			}
+		},
+		error: function (e) {
+        		alert("Error");
+   		}
 	
+	});
+}
+function showchildstat(){
+	$.ajax({
+		url: 'http://127.0.0.1:5000/stat',
+		dataType: "json",
+		success: function(resp){
+			
+			alert(resp.message);
+		}
+		
+	});
+	
+	
+}
+function displachildstat(){
+	document.getElementById('showdata').innerHTML="Hello";
+}
+function childrow(childid, childfname, childlname, childweight, childheight, status){
+	
+	 return '<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">'+
+          '<h4>' + childid + "&nbsp;&nbsp;" +  childfname+ "&nbsp;&nbsp;" +childlname+ '</h4>' +
+          '<p> Status: '+status+'</p>'+
+				'Weight: '+childweight+'<br>'+
+				'Height: '+childheight+'<br>'+
+		  '</div>'; 
+}

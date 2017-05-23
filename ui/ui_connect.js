@@ -2,10 +2,10 @@ $(function(){
 	$('#focal').click(function(){
 		$('#stat').hide();
 		$('#func_focal').show();
-		$('#work').show();
-		$('#func_child').hide();
-		$('#func_municipality').hide();
-		//$('#focal').hide();
+		$('#focwork').show();
+		$('#childfunc').hide();
+		$('#children').hide();
+		$('#childwork').hide();
 		
 		
 		
@@ -13,16 +13,21 @@ $(function(){
 	
 	$('#municipality').click(function(){
 		$('#stat').hide();
-		$('#func_child').hide();
-		$('#func_municipality').show();
 		$('#func_focal').hide();
-	
+		$('#focwork').hide();
+		$('#childfunc').hide();
+		$('#children').hide();
+		$('#childwork').hide();
+		
 	});
+	
 	
 	$('#child_entry').click(function(){
 		$('#stat').hide();
-		$('#func_child').show();
 		$('#func_municipality').hide();
+		$('#focwork').hide();
+		$('#childfunc').hide();
+		$('#childwork').show();
 	
 	
 	});
@@ -30,10 +35,11 @@ $(function(){
 	$('#overview').click(function(){
 		$('#stat').show();
 		$('#func_focal').hide();
-		$('#func_child').hide();
-		$('#func_municipality').hide();
-		$('#work').hide();
-	
+		$('#focwork').hide();
+		$('#childtask').empty();
+		$('#children').hide();
+		$('#childwork').hide();
+		
 	
 	});
 	

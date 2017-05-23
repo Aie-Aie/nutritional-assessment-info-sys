@@ -34,17 +34,17 @@ def index():
     return "HI"
 
 #search
-@app.route('/focaldata', methods=['GET'])
-def searchfocal():
-	data = request.form['focdetail']
-	res =spcall('searchfocal', data, True)
-	print data
+@app.route('/focaldata/<string:data>', methods=['GET'])
+def searchfocal(data):
+
+	res =spcall('searchfocal',(data,), True)
+	print res
 	if 'Error' in str(res[0][0]):
 		return jsonify({'status':'error', 'message':res[0][0]})
 	
 	recs=[]
 	for r in res:
-		recs.append({"fname": r[3], "lname": r[1], "position": str(r[2])})
+		recs.append({"fname": r[0], "lname": r[1], "position": str(r[2])})
 	
 	return jsonify({'status':'ok', 'entries':recs, 'count':len(recs)})
 	
@@ -63,6 +63,8 @@ def getfocal():
     for r in res:
         recs.append ({"id": r[0], "first_name": r[1], "last_name": r[2], "position": r[3]})
     return jsonify ({'status': 'ok', 'entries': recs, 'count': len (recs)})
+
+
 
 #view child data
 @app.route('/childentries', methods=['GET'])
@@ -87,6 +89,8 @@ def login():
         return render_template ("signin.html")
     else:
         return render_template ("dashboard.html")
+		
+#statistics
 @app.route('/stat', methods=["GET"])
 def showchildstat():
 	

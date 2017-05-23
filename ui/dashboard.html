@@ -20,8 +20,9 @@
   </head>
 
   <body>
-		<!-- start nav -->
+	
 		<div>
+			<!-- start nav -->
 			<nav class="navbar navbar-inverse navbar-fixed-top">
 				<div class="container-fluid">
 					<div class="navbar-header">
@@ -44,12 +45,9 @@
 					</div>
 				</div>
 			</nav>
-		</div>
-		<!-- end nav -->
-
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-sm-3 col-md-2 sidebar">
+				<!-- end nav -->
+			
+			<div class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
 						<li id="overview"><a href="#">Overview<span class="sr-only"></span></a></li>
 						<li id="focal"><a href="#">Focal Person</a></li>
@@ -57,25 +55,77 @@
 						<li id="child_entry"><a href="#">Children</a></li>
 					</ul>
 
-				</div>
-				<!-- class col-sm-3 -->
-
-				<div id="stat" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			</div>
+			<!-- class col-sm-3 -->
+			<div id="stat" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 					<h2 class="sub-header">Statistical Summary</h2>
-				</div>
-				<!-- stat -->
+					<div class="col-lg-8">
+						<table id="example2" class="table table-bordered table-hover">
+							<thead>
+							<tr>
+							  <th>Data</th>
+							  <th style="width:50px">Label</th>
+							  
+							</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Children</td>
+									<td>
+										<span><button type="button" onclick="showchildstat();" data-toggle="modal" data-target="#statchild" class="btn btn-block btn-primary">Show</button></span>
+									</td>
+							
+						
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!--table-->
+					
+					<div class="example-modal">
+						<div class="modal modal-success" id="statchild">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button"  class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span></button>
+										<h4 class="modal-title">Data</h4>
+									</div>
+									<div class="modal-body">
+										<p id="showdata"></p>
+									</div>
+									
+								</div>
+							<!-- /.modal-content -->
+							</div>
+							<!-- /.modal-dialog -->
+						</div>
+						<!-- /.modal -->
+					</div>
+					<!-- /.example-modal -->
+					
+			</div>
+			<!-- stat --> 
+			
+		</div>
+		<!-- design -->
+
+		<div id="focfun" class="container-fluid">
 				
-				<!--focal start -->
-				<div id="focal">
-				<div id="work" style="display:none;" align= "right">
+	
+	<!--focal start -->
+				
+				<div id="focwork" style="display:none;" align= "right">
 					<div id="task">
 					<br>
 					<br>
 					<!-- form inline -->
 					<form class="form-inline" pull-right>
 						<div class="form-group">
-							<input type="text" class="form-control" id="focalsearch" name="focdetail" placeholder="Search">
-							<a href="#" onclick= "searchfoc();" ><span class="glyphicon glyphicon-search"></span></a>
+							<input type="text" class="form-control" id="focdetail" name="focdetail" placeholder="Search">
+							<a href="#"><span onclick= "searchfoc();" class="glyphicon glyphicon-search"></span></a>
+							
+							
 						</div>
 
 						<button type="button" style="padding-left: 5px"class="btn btn-primary">Update Entry</button>
@@ -94,7 +144,7 @@
 									<!-- modal-header -->
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h3 style="color: cornflowerblue;" class="modal-title"><b>New Entry</b></h3>
+										<h3 style="color: #001f3f;" class="modal-title"><b>New Entry</b></h3>
 									</div>
 									<!-- modal-header -->
 									<div class="modal-body">
@@ -148,30 +198,133 @@
 						<br>
 					</div>
 					<!-- container -->
-				</div>
-				<!-- work -->
-				</div>
-				
-				<!-- func_focal -->
-				<div   id="func_focal" align= "left" style="display:none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				
-				</div>
-				<!-- func_focal-->
-				<div id="func_municipality" style="display:none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-						<h3>Municipality</h3>
+	
+						<!-- func_focal -->
+					<div   id="func_focal" align= "left" style="display:none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+						
 					</div>
-					<!-- municipality -->
+					<!-- func_focal-->
+					<div id="viewsearchfocal" style="display:none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+						<table style="width: 100%">
+							<thead>
+								<tr>
+									<th>First Name</th>
+									<th>Last Name</th>
+									<th>Position</th>
+								</tr>
+							</thead>
+							<tbody id="tbody"></tbody>
+						</table>
+					</div>
+				</div>
+		<!-- end focwork -->
+		<!-- start childwork -->
+				<div id="childwork"  style="display:none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+					<div align ="right">
+						<br>
+						<br>
+						<!-- form inline -->
+						<form class="form-inline" pull-right>
+							<div class="form-group">
+								<input type="text" class="form-control" id="focdetail" name="focdetail" placeholder="Search">
+								<a href="#"><span onclick= "searchchild();" class="glyphicon glyphicon-search"></span></a>
+								
+								
+							</div>
 
-					<div id="func_child" style="display:none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-						<h3>Child</h3>
+							<button type="button" style="padding-left: 5px"class="btn btn-primary">Update Entry</button>
+							<button type="button" onclick="loadchild();" class="btn btn-primary">Load Entries</button>
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#childmodal" >Add Entry</button>
+							<button type="button" class="btn btn-primary">Delete Entry</button>
+							
+
+					</form>
+					<!-- form-inline-->
 					</div>
-					<!-- child -->
 					
-			</div>
-			<!--row -->
+					<div class="container">
+						<div class="modal fade" id="childmodal" role="dialog" align="left">
+							<div class="modal-dialog"> 
+								<div class="modal-content">
+									<!-- modal-header -->
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h3 style="color: cornflowerblue;" class="modal-title"><b>New Entry</b></h3>
+									</div>
+									<!-- modal-header -->
+									<div class="modal-body">
+										<form class="form-inline" method="post" text-align="right">
+											
+											
+											<p>
+											<label for="id">ID:</label>
+											<input type="text" class="form-control" name ="childid" id="childid" placeholder="ID">
+											<br>
+											<br>
+											</p>
+											
+											<p>
+											<label for="fname">First Name:</label>
+											<input type="text" class="form-control" name ="childfname" id="childfname" placeholder="First Name">
+											<br>
+											<br>
+											</p>
+											
+											<p>
+											<label for="lname">Last Name:</label>
+											<input type="text" class="form-control" name="childlname" id="childlname" placeholder="Last Name">
+											<br>
+											<br>
+											</p>
+											
+											
+											<p>
+											<label>Weight:</label>
+											<input type="text" class="form-control" name= "weight" id="weight" placeholder="Weight in kg">
+											<br>
+											<br>
+											</p>
+
+											<p>
+											<label>Height:</label>
+											<input type="text" class="form-control" name= "height" id="height" placeholder="Height in meters">
+											<br>
+											<br>
+											</p>
+
+										</form>
+
+											
+										<div>
+											<button type="button" onclick= "addchild();" align="right" id="submit" class="btn btn-primary">Submit</button>
+										</div>
+									
+									</div>
+									<!-- modal-body -->
+								</div>
+								<!-- modal-content -->
+							</div>
+							<!-- modal-dialog -->
+						</div>
+						<!-- modal-fade -->
+						<br>
+						<br>
+					</div>
+					<!-- container -->
+					<div id="func_child">
+					
+					</div>
+				</div>
+
+				
+		<!-- end childwork -->
+				
+		
+			
 		</div>
 		<!-- container-fluid -->
-	
+		
+		
 
  
   </body>
