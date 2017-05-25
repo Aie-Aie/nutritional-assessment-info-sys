@@ -1,5 +1,8 @@
 
 function loadentry(){
+	
+	
+	
 	$.ajax
 	({
 		url: 'http://127.0.0.1:5000/focalentries',
@@ -7,8 +10,7 @@ function loadentry(){
 		dataType: "json",
 		success: function(resp)
 		{
-			
-			$("#func_focal").html("");
+			$('#loadentry').html("");
 			if(resp.status =="ok")
 			{
 				for(i=0; i<resp.count; i++)
@@ -16,9 +18,9 @@ function loadentry(){
 					id = resp.entries[i].id;
 					first_name=resp.entries[i].first_name;
 					last_name = resp.entries[i].last_name;
-					position = resp.entries[i].position;
-					 $("#func_focal").append(rowtask(id, first_name, last_name, position));
-					
+					position = resp.entries[i].position;	
+					$("#loadentry").append(rowentry(id, first_name, last_name, position));
+					$('#func_focal').show();
 				}
 			}
 			else
@@ -35,40 +37,53 @@ function loadentry(){
 	});
 }
 
-function rowtask(id, lname, fname, pos)
+function rowentry(id, fname, lname, pos)
 {
-
 	
- return '<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">'+
-	  '<h4>' + id + "&nbsp;&nbsp;" + fname+ "&nbsp;&nbsp;" +lname+ '</h4>' +
-	  '<p> Position: '+pos+'</p>'+
-	  '</div>'; 
+	return '<tr class="table-success">'+
+			'<td>'+id+'</td>'+
+			'<td>'+fname+'</td>'+
+			'<td>'+lname+'</td>'+
+			'<td>'+position+'</td>'+
+			'</tr>';
+	
+}
+
+function searchchild(){
+	var data =$('#childdetail').val();
+	$.ajax({
+		
+	});
 }
 
 
 function searchfoc(){
+	
+	
 	var data =$('#focdetail').val();
-	console.log(data);
 	$.ajax({
 		url: 'http://127.0.0.1:5000/focaldata/'+data,
 		type: "GET",
 		dataType: "json",
 		success: function(resp)
 		{
-		
+			$("#tbody").html("");
+			
 			if(resp.status == 'ok'){
 				for(i=0; i<resp.count; i++)
 				{
 					fname = resp.entries[i].fname;
 					lname =resp.entries[i].lname;
 					position=resp.entries[i].position;
-					$("#func_focal").append(rowfoc(fname, lname, position));
-					//rowfoc(fname, lname, position);
+					$("#tbody").append(rowfoc(fname, lname, position));
+					$('#viewsearchfocal').show();
+					$('#func_focal').hide();
+					
 				}
 			
 			}
 			else{
-				$('#func_focal').html("");
+				$("#tbody").html("");
 				alert(resp.message);
 			}
 			
@@ -82,22 +97,21 @@ function searchfoc(){
 		
 	});
 }
-function deletefocal(){
-	alert("hi uy");
+
+function updatefoc(){
+	alert("Hi");
 }
+
 	
 function rowfoc(fname, lname, position){
-	
-	 var row = '<tr class="table-success">'+
+
+	 return '<tr class="table-success">'+
 			'<td>'+fname+'</td>'+
 			'<td>'+lname+'</td>'+
 			'<td>'+position+'</td>'+
 			'<td style="width:200px;"><button class="btn success" onclick="updatefoc();" style="background-color: #4CAF50;"><b>Update</b></button>'+
 			'<button class="btn success" onclick= "deletefocal();" style="background-color: #f44336;"><b>Delete</b></button></td>'+
 			'</tr>';
-	
-   $("tbody").append(row);
-    
 }
 function addfocal(){
 	$.ajax({
@@ -157,7 +171,7 @@ function loadchild(){
 		dataType: 'json',
 		success: function(resp)
 		{
-			$('#func_focal').html("");
+			$('#childentry').html("");
 			if(resp.status == 'ok'){
 				for(i=0; i<resp.count; i++)
 				{
@@ -167,12 +181,13 @@ function loadchild(){
 					childweight =resp.entries[i].weight;
 					childheight=resp.entries[i].height;
 					status=resp.entries[i].status;
-					$("#func_child").append(childrow(childid, childfname, childlname, childweight, childheight, status));
+					$("#childentry").append(childrow(childid, childfname, childlname, childweight, childheight, status));
+					$('#childentrydata').show();
 				}
 			
 			}
 			else{
-				$('#func_focal').html("");
+				$('#childentry').html("");
 				alert(resp.message);
 			}
 		},
@@ -182,6 +197,21 @@ function loadchild(){
 	
 	});
 }
+
+function childrow(childid, childfname, childlname, childweight, childheight, status){
+	
+	 
+	return '<tr class="table-success">'+
+			'<td>'+childid+'</td>'+
+			'<td>'+childfname+'</td>'+
+			'<td>'+childlname+'</td>'+
+			'<td>'+childweight+'</td>'+
+			'<td>'+childheight+'</td>'+
+			'<td>'+status+'</td>'+
+			'</tr>';
+	
+}
+
 function showchildstat(a){
 	$.ajax({
 		url: 'http://127.0.0.1:5000/stat',
@@ -194,17 +224,4 @@ function showchildstat(a){
 	});
 	
 	
-}
-function updatefoc(){
-	alert("Hi");
-}
-
-function childrow(childid, childfname, childlname, childweight, childheight, status){
-	
-	 return '<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">'+
-          '<h4>' + childid + "&nbsp;&nbsp;" +  childfname+ "&nbsp;&nbsp;" +childlname+ '</h4>' +
-          '<p> Status: '+status+'</p>'+
-				'Weight: '+childweight+'<br>'+
-				'Height: '+childheight+'<br>'+
-		  '</div>'; 
 }

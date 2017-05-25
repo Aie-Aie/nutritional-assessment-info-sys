@@ -200,11 +200,23 @@
 					<!-- container -->
 	
 						<!-- func_focal -->
-					<div   id="func_focal" align= "left" style="display:none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-						
+					<div   id="func_focal" align= "left"  style="display:none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+						<table class="table table-bordered">
+							<thead id="tablehead">
+								<tr>
+									<th>ID</th>
+									<th>First Name</th>
+									<th>Last Name</th>
+									<th>Position</th>
+								
+								</tr>
+							</thead>
+							<tbody id="loadentry"></tbody>
+						</table>
 					</div>
 					<!-- func_focal-->
-					<div id="viewsearchfocal" style="display:none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+					<!---view search focal -->
+					<div id="viewsearchfocal"  style="display:none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 						<table class="table table-bordered">
 							<thead id="tablehead">
 								<tr>
@@ -228,16 +240,16 @@
 						<!-- form inline -->
 						<form class="form-inline" pull-right>
 							<div class="form-group">
-								<input type="text" class="form-control" id="focdetail" name="focdetail" placeholder="Search">
+								<input type="text" class="form-control" id="childdetail" name="childdetail" placeholder="Search">
 								<a href="#"><span onclick= "searchchild();" class="glyphicon glyphicon-search"></span></a>
 								
 								
 							</div>
 
-							<button type="button" style="padding-left: 5px"class="btn btn-primary">Update Entry</button>
+							
 							<button type="button" onclick="loadchild();" class="btn btn-primary">Load Entries</button>
 							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#childmodal" >Add Entry</button>
-							<button type="button" class="btn btn-primary">Delete Entry</button>
+							
 							
 
 					</form>
@@ -313,7 +325,22 @@
 						<br>
 					</div>
 					<!-- container -->
-					<div id="func_child">
+					<div id="childentrydata"  style="display:none;" >
+						<table  class="table table-bordered">
+							<thead id="tablehead">
+								<tr>
+									<th>ID</th>
+									<th>First Name</th>
+									<th>Last Name</th>
+									<th>Weight</th>
+									<th>Height</th>
+									<th>Status</th>
+									
+								
+								</tr>
+							</thead>
+							<tbody id="childentry"></tbody>
+						</table>
 					
 					</div>
 				</div>

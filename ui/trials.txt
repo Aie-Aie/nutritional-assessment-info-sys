@@ -1,0 +1,13 @@
+
+1. create an array of colors with corresponding value
+or create 2 arrays 1 for array of color then 1 for array of values in each color
+
+color= [red, blue, etc]
+value= [value of red, val of blue, etc]
+
+if input= color 
+	then check indexofcolor retrieve value[indexofcolor]
+	
+	if firstinput = digit ra*10
+	if second input 
+		firstinput +second input

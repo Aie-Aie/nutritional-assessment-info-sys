@@ -1,12 +1,18 @@
 $(function(){
 	$('#focal').click(function(){
 		$('#stat').hide();
-		$('#func_focal').show();
+		
 		$('#focwork').show();
 		$('#childfunc').hide();
 		$('#children').hide();
 		$('#childwork').hide();
-		$('#viewsearchfocal').show();
+		$('#func_focal').hide();
+		$('#viewsearchfocal').hide();
+		
+		//$('#viewsearchfocal').show();
+		//$('#func_focal').show();  //load focals
+		
+		
 		
 		
 		
@@ -30,6 +36,7 @@ $(function(){
 		$('#focwork').hide();
 		$('#childfunc').hide();
 		$('#childwork').show();
+		$('#childentrydata').hide();
 	
 	
 	});
