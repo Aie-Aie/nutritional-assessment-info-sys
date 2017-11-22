@@ -12,7 +12,13 @@ $$
 language 'sql';
 --select * from countstat('Normal')
 
+create or replace function countfoc() returns int8 as
+$$
+	select count(position) from employees where position='Focal Person';
+$$
+language 'sql'
 
+--select * from countfoc()
 create or replace function getfocal(out int8, out text, out text, out text) returns setof record as
 $$
 	select id, first_name, last_name, position from employees;
@@ -35,6 +41,13 @@ language 'sql';
 
 --select * from searchfocal('Holmes');
 
+create or replace function searchchild(in par_data text, out text, out text, out text) returns setof record as
+$$
+	select children.first_name, children.last_name, statusRepo.nutritional_status from children, statusRepo where children.id=statusRepo.id and (children.first_name=par_data or children.last_name=par_data, statusRepo.nutritional_status=par_data);
+$$
+language 'sql';
+--select * from searchchild('A');
+--select * from searchchild('Obesity');
 
 create table employees(
 	id int8 primary key,
@@ -108,22 +121,26 @@ create table statusRepo(
 	calc_BMI real,
 	nutritional_status text
 );
+create table municipality(
+	id int8 primary key references children(id),
+	place text
+);
 
-create or replace function newchild(par_id int8,par_fname text, par_lname text, par_weight real, par_height real) returns text as
+create or replace function newchild(par_id int8,par_fname text, par_lname text, par_weight real, par_height real, par_local text) returns text as
 $$
 	declare
 		loc_id text;
-		id text;
 		loc_res text;
 		status real;
 	
 	begin
+		select into loc_id id from children where id=par_id;
 		if loc_id isnull then
 			insert into children(id, first_name, last_name, weight, height) values (par_id, par_fname, par_lname, par_weight, par_height);
-			
+			insert into municipality(id, place) values (par_id, par_local);
 			status := par_weight/(par_height*par_height);
 			
-			case
+				case
 				when status< 18.5 then
 					insert into statusRepo(id, calc_BMI, nutritional_status) values(par_id, status, 'Underweight');
 				
@@ -136,22 +153,20 @@ $$
 					insert into statusRepo(id, calc_BMI, nutritional_status) values(par_id, status, 'Obesity');
 				
 			end case;
-		
-			
-			
 			loc_res ='Successfully added';
-			
-			
-		elsif loc_id is not null then
+		
+			elsif loc_id is not null then
 			loc_res ='Child exists';
 		
 		end if;
 			return loc_res;
 	
-			
+		
 	end;
+
 $$
 	language 'plpgsql';
+
 
 
 create or replace function newchild2(par_id int8,par_fname text, par_lname text, par_weight real, par_height real) returns text as
@@ -182,7 +197,7 @@ $$
 			end case;
 			loc_res ='Successfully added';
 		
-			elsif loc_id is not null then
+		elsif loc_id is not null then
 			loc_res ='Child exists';
 		
 		end if;

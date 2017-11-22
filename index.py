@@ -37,19 +37,29 @@ def index():
 @app.route('/focaldata/<string:data>', methods=['GET'])
 def searchfocal(data):
 
-	res =spcall('searchfocal',(data,), True)
-	print res
-	if 'Error' in str(res[0][0]):
-		return jsonify({'status':'error', 'message':res[0][0]})
-	
-	recs=[]
-	for r in res:
-		recs.append({"fname": r[0], "lname": r[1], "position": str(r[2])})
-	
-	return jsonify({'status':'ok', 'entries':recs, 'count':len(recs)})
-	
+    res =spcall('searchfocal',(data,), True)
+    if 'Error' in str(res[0][0]):
+        return jsonify({'status':'error', 'message':res[0][0]})
 
-	
+    recs=[]
+    for r in res:
+        recs.append({"fname": r[0], "lname": r[1], "position": str(r[2])})
+
+    return jsonify({'status':'ok', 'entries':recs, 'count':len(recs)})
+
+
+@app.route('/childdata/<string:data>', methods=['GET'])
+def searchchild(data):
+    res=spcall('searchchild', (data,), True)
+    if 'Error' in str(res[0][0]):
+        return jsonify({'status':'error', 'message':res[0][0]})
+
+    recs=[]
+    for r in res:
+        recs.append({"fname":r[0], "lname":r[1], "status":r[2]})
+
+    return jsonify({'status':'ok', 'entries':recs, 'count':len(recs)})
+
 
 # view existing focals
 @app.route ('/focalentries', methods=['GET'])
@@ -69,34 +79,36 @@ def getfocal():
 #view child data
 @app.route('/childentries', methods=['GET'])
 def getchildren():
-	res= spcall('getchildren', ())
-	
-	recs=[]
-	if 'Error' in str(res[0][0]):
-		return jsonify({'status':'ok', 'message':res[0][0]})
-	for r in res:
-		recs.append({"id":r[0], "first_name":r[1], "last_name":r[2], "weight":r[3], "height":r[4],  "status":r[5]})
-	
-	return jsonify({'status':'ok', 'entries':recs, 'count':len(recs)})
+    res= spcall('getchildren', ())
 
-@app.route('/access', methods=['POST'])
-def login():
-    id = request.form['id']
-    name = request.form['name']
+    recs=[]
+    if 'Error' in str(res[0][0]):
+        return jsonify({'status':'ok', 'message':res[0][0]})
+    for r in res:
+        recs.append({"id":r[0], "first_name":r[1], "last_name":r[2], "weight":r[3], "height":r[4],  "status":r[5]})
 
+    return jsonify({'status':'ok', 'entries':recs, 'count':len(recs)})
+
+@app.route('/access/<id>/<string:name>', methods=['POST'])
+def login(id, name):
+    
     res = spcall ("getaccess", (id, name), True)
-    if 'Person not authorized' in res[0][0]:
-        return render_template ("signin.html")
-    else:
-        return render_template ("dashboard.html")
-		
+    return jsonify({'status':res[0][0]})
+
 #statistics
-@app.route('/stat', methods=["GET"])
+@app.route('/childstat')
 def showchildstat():
-	
-	res =spcall('countstat', 'Obesity', True)
-	return jsonify({'status':'ok', 'result':res[0]})
-	
+    status= ['Obesity', 'Normal', 'Underweight']
+    recs=[]
+    for n in status:
+        recs.append(spcall("countstat", (str(n),), True))
+
+    return jsonify({'status':'ok','count':len(recs), 'Obese':recs[0][0][0], 'Normal':recs[1][0][0], 'UW':recs[2][0][0]})
+
+@app.route('/focstat')
+def showfocstat():
+	res =spcall("countfoc", (), True)
+	return jsonify({'status':'ok', 'data':res[0][0]})
 	
 # new focal added
 @app.route ('/focal', methods=['POST'])

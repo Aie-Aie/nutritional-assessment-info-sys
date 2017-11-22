@@ -6,7 +6,7 @@ import os
 
 class DBconnection:
     def __init__(self):
-        engine = create_engine("postgres://postgres:postgres@127.0.0.1:5432/NAInfoSys", echo=False)
+        engine = create_engine("postgres://181:postgres@127.0.0.1:5432/NAInfoSys", echo=False)
         self.conn = engine.connect()
         self.trans = self.conn.begin()
 
