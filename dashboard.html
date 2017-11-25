@@ -1,0 +1,383 @@
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Information System</title>
+
+
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="dashboard.css" rel="stylesheet">
+	<script src="jQuery-2.1.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script type="text/javascript" src = "ui_connect.js"></script>
+  </head>
+
+  <body>
+	
+		<div>
+			<!-- start nav -->
+			<nav class="navbar navbar-inverse navbar-fixed-top">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					<a class="navbar-brand"  href="#">Nutritional Assessment Information System</a>
+					</div>
+					<div id="navbar" class="navbar-collapse collapse">
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="#">Dashboard</a></li>
+							<li><a href="#">Profile</a></li>
+							<li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+
+						</ul>
+
+					</div>
+				</div>
+			</nav>
+				<!-- end nav -->
+			
+			<div class="col-sm-3 col-md-2 sidebar" id= "sidebar">
+					<ul class="nav nav-sidebar">
+						<li id="overview"><a href="#">Overview<span class="sr-only"></span></a></li>
+						<li id="focal"><a href="#">Focal Person</a></li>
+						<!--<li id="municipality"><a href="#">Municipality</a></li> 
+						-->
+						<li id="child_entry"><a href="#">Children</a></li>
+					</ul>
+
+			</div>
+			<!-- class col-sm-3 -->
+			<div class="col-sm-9 col-sm-offset-3 col-md-15 col-md-offset-2 main">
+				<div id="stat">
+						<h2 class="sub-header">Statistical Summary</h2>
+						<div class="col-lg-8">
+							<table id="example2" class="table table-bordered table-hover">
+								<thead>
+								<tr>
+								  <th>Data</th>
+								  <th style="width:50px">Label</th>
+								  
+								</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Children</td>
+										<td>
+											<span><button type="button" onclick="showchildstat();" data-toggle="modal" data-target="#statchild" class="btn btn-block btn-primary">Show</button></span>
+										</td>
+								
+							
+									</tr>
+									
+									<tr>
+										<td>Focal Person</td>
+										<td>
+											<span><button type="button" onclick="showfocstat();" data-toggle="modal" data-target="#statchild" class="btn btn-block btn-primary">Show</button></span>
+										</td>
+								
+							
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!--table-->
+					<div>
+					
+						<h3 style="display:none;" id ="display" align="center"><b>Results</b></h3>
+						<div align="center" id="childresult">
+							
+						
+						</div>
+						
+						<div align="center" id="focresult">
+					</div>
+					
+					
+					</div>
+					
+
+			</div>
+			<!-- stat --> 
+			
+		</div>
+		<!-- design -->
+
+		<div id="focfun" class="container-fluid">
+				
+	
+	<!--focal start -->
+				
+				<div id="focwork" style="display:none;" align= "right">
+					<div id="task">
+					<br>
+					<br>
+					<!-- form inline -->
+					<form class="form-inline" pull-right>
+						<div class="form-group">
+							<input type="text" class="form-control" id="focdetail" name="focdetail" placeholder="Search">
+							<a href="#"><span onclick= "searchfoc();" class="glyphicon glyphicon-search"></span></a>
+							
+							
+						</div>
+
+						
+						<button type="button" onclick="loadentry();" class="btn btn-primary">Load Entries</button>
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" >Add Entry</button>
+					
+						
+
+					</form>
+					<!-- form-inline-->
+					</div>
+					<div class="container">
+						<div class="modal fade" id="myModal" role="dialog" align="left">
+							<div class="modal-dialog"> 
+								<div class="modal-content">
+									<!-- modal-header -->
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h3 style="color: #001f3f;" class="modal-title"><b>New Entry</b></h3>
+									</div>
+									<!-- modal-header -->
+									<div class="modal-body">
+										<form class="form-inline" method="post" text-align="right">
+											
+											<p>
+											<label for="id">ID:</label>
+											<input type="text" class="form-control" name="id" id="id" placeholder="ID">
+											<br>
+											<br>
+											</p>
+											
+											<p>
+											<label for="fname">First Name:</label>
+											<input type="text" class="form-control" name ="fname" id="fname" placeholder="First Name">
+											<br>
+											<br>
+											</p>
+											
+											<p>
+											<label for="lname">Last Name:</label>
+											<input type="text" class="form-control" name="lname" id="lname" placeholder="Last Name">
+											<br>
+											<br>
+											</p>
+											
+											
+											<p>
+											<label for="position">Position:</label>
+											<input type="text" class="form-control" name= "pos" id="pos" placeholder="Position">
+											<br>
+											<br>
+											</p>
+
+										</form>
+
+											
+										<div>
+											<button type="button" onclick= "addfocal();" align="right" id="submit" class="btn btn-primary">Submit</button>
+										</div>
+										
+									</div>
+									<!-- modal-body -->
+								</div>
+								<!-- modal-content -->
+							</div>
+							<!-- modal-dialog -->
+						</div>
+						<!-- modal-fade -->
+						<br>
+						<br>
+					</div>
+					<!-- container -->
+	
+						<!-- func_focal -->
+					<div   id="func_focal" align= "left"  style="display:none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+						<table class="table table-bordered">
+							<thead id="tablehead">
+								<tr>
+									<th>ID</th>
+									<th>First Name</th>
+									<th>Last Name</th>
+									<th>Position</th>
+								
+								</tr>
+							</thead>
+							<tbody id="loadentry"></tbody>
+						</table>
+					</div>
+					<!-- func_focal-->
+					<!---view search focal -->
+					<div id="viewsearchfocal"  style="display:none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+						<table class="table table-bordered">
+							<thead id="tablehead">
+								<tr>
+								
+									<th>First Name</th>
+									<th>Last Name</th>
+									<th>Position</th>
+									<th>Tasks</th>
+								</tr>
+							</thead>
+							<tbody id="tbody"></tbody>
+						</table>
+					</div>
+				</div>
+		<!-- end focwork -->
+		<!-- start childwork -->
+				<div id="childwork"  style="display:none;" >
+					<div align ="right">
+						<br>
+						<br>
+						<!-- form inline -->
+						<form class="form-inline" pull-right>
+							<div class="form-group">
+								<input type="text" class="form-control" id="childdetail" name="childdetail" placeholder="Search">
+								<a href="#"><span onclick= "searchchild();" class="glyphicon glyphicon-search"></span></a>
+								
+								
+							</div>
+
+							
+							<button type="button" onclick="loadchild();" class="btn btn-primary">Load Entries</button>
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#childmodal" >Add Entry</button>
+							
+							
+
+					</form>
+					<!-- form-inline-->
+					</div>
+					
+					<div class="container">
+						<div class="modal fade" id="childmodal" role="dialog" align="left">
+							<div class="modal-dialog"> 
+								<div class="modal-content">
+									<!-- modal-header -->
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h3 style="color: cornflowerblue;" class="modal-title"><b>New Entry</b></h3>
+									</div>
+									<!-- modal-header -->
+									<div class="modal-body">
+										<form class="form-inline" method="post" text-align="right">
+											
+											
+											<p>
+											<label for="id">ID:</label>
+											<input type="text" class="form-control" name ="childid" id="childid" placeholder="ID">
+											<br>
+											<br>
+											</p>
+											
+											<p>
+											<label for="fname">First Name:</label>
+											<input type="text" class="form-control" name ="childfname" id="childfname" placeholder="First Name">
+											<br>
+											<br>
+											</p>
+											
+											<p>
+											<label for="lname">Last Name:</label>
+											<input type="text" class="form-control" name="childlname" id="childlname" placeholder="Last Name">
+											<br>
+											<br>
+											</p>
+											
+											
+											<p>
+											<label>Weight:</label>
+											<input type="text" class="form-control" name= "weight" id="weight" placeholder="Weight in kg">
+											<br>
+											<br>
+											</p>
+
+											<p>
+											<label>Height:</label>
+											<input type="text" class="form-control" name= "height" id="height" placeholder="Height in meters">
+											<br>
+											<br>
+											</p>
+
+										</form>
+
+											
+										<div>
+											<button type="button" onclick= "addchild();" align="right" id="submit" class="btn btn-primary">Submit</button>
+										</div>
+									
+									</div>
+									<!-- modal-body -->
+								</div>
+								<!-- modal-content -->
+							</div>
+							<!-- modal-dialog -->
+						</div>
+						<!-- modal-fade -->
+						<br>
+						<br>
+					</div>
+					<!-- container -->
+					<div id="childentrydata"  style="display:none;"class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+						<table  class="table table-bordered">
+							<thead id="tablehead">
+								<tr>
+									<th>ID</th>
+									<th>First Name</th>
+									<th>Last Name</th>
+									<th>Weight</th>
+									<th>Height</th>
+									<th>Status</th>
+									
+								
+								</tr>
+							</thead>
+							<tbody id="childentry"></tbody>
+						</table>
+					
+					</div>
+					<div id="viewsearchchild"  style="display:none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+						<table align="right" class="table table-bordered">
+							<thead id="tablehead1">
+								<tr>
+								
+									<th>First Name</th>
+									<th>Last Name</th>	
+									<th>Status</th>
+									<th>Tasks</th>
+								</tr>
+							</thead>
+							<tbody id="childtbody"></tbody>
+						</table>
+					</div>
+					
+				</div>
+
+				
+		<!-- end childwork -->
+				
+		
+			
+		</div>
+		<!-- container-fluid -->
+		
+		
+
+ 
+  </body>
+	<script src="jQuery-2.1.4.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="ui_connect.js"></script>
+	<script src="app.js"></script>
+
+</html>
